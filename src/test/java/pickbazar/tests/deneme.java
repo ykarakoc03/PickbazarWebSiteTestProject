@@ -2,7 +2,7 @@ package pickbazar.tests;
 
 
 import org.testng.annotations.Test;
-import pickbazar.pages.HomePage;
+import pickbazar.pages.P02_HomePage;
 import pickbazar.utilities.BaseTestReport;
 
 public class deneme extends BaseTestReport {
@@ -12,7 +12,7 @@ public class deneme extends BaseTestReport {
     public void testgiris() throws InterruptedException {
         driver.get("https://shop-pickbazar-rest.vercel.app/");
 
-HomePage hp = new HomePage(driver);
+P02_HomePage hp = new P02_HomePage(driver);
 
      hp
              .homePageMenuDropDown("bags")

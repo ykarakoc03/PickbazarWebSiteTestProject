@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -21,13 +22,14 @@ public class BaseTestReport {
     protected WebDriver driver;
     protected Actions actions;
 
+    protected SoftAssert softAssert;
     protected ExtentReports extentReports; //extent report'a ilk atamayi yaparv
     protected ExtentHtmlReporter extentHtmlReporter; // Html raporu duzenler
     protected ExtentTest extentTest;
 
 
     @BeforeSuite
-    public void beforeSuite(){
+    public void beforeSuite() {
 
         //Create extent report
         extentReports = new ExtentReports(); // Raporlamayi baslatir
@@ -57,9 +59,9 @@ public class BaseTestReport {
 
     @BeforeMethod
     @Parameters("browser")
-    public void setup(@Optional("chrome") String browser){
+    public void setup(@Optional("chrome") String browser) {
 
-        switch (browser){
+        switch (browser) {
 
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -75,24 +77,22 @@ public class BaseTestReport {
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-
+        softAssert = new SoftAssert();
         actions = new Actions(driver);
 
-
+        driver.get(ConfigReader.getProperty("homePageURL"));
     }
 
     @AfterMethod
     public void teardown(ITestResult result) throws IOException {
 
-        if(result.getStatus() == ITestResult.FAILURE){
+        if (result.getStatus() == ITestResult.FAILURE) {
             String screenShotLocation = ReusableMethods.getScreenshot(driver, result.getName());
             extentTest.fail(result.getName());
             extentTest.addScreenCaptureFromPath(screenShotLocation);
             extentHtmlReporter.config().setDocumentTitle(screenShotLocation);
             extentTest.fail(result.getThrowable());
-        }
-        else if (result.getStatus() == ITestResult.SKIP) { // eğer test çalıştırılmadan geçilmezse
+        } else if (result.getStatus() == ITestResult.SKIP) { // eğer test çalıştırılmadan geçilmezse
             extentTest.skip("Test Case is skipped: " + result.getName()); // Ignore olanlar
         }
 
@@ -100,7 +100,7 @@ public class BaseTestReport {
     }
 
     @AfterSuite
-    public void afterSuite(){
+    public void afterSuite() {
         extentReports.flush();
     }
 

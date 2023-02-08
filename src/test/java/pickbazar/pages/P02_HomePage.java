@@ -4,36 +4,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Set;
 
-public class HomePage extends FunctionClass {
+
+public class P02_HomePage extends P01_FunctionClass {
 
 
-    public HomePage(WebDriver driver) {
+    public P02_HomePage(WebDriver driver) {
         super(driver);
     }
 
+
+
+
     // Ana sayfada üst tarafta bulunan Join
     By joinButton = By.xpath("//button[text()='Join']");
-
-    public HomePage btnJoin() {
+    public P02_HomePage btnJoin() {
         click(joinButton);
         return this;
     }
 
+
     // Ana sayfada üst tarafta bulunan Become A Seller
     //yeni tab sayfada acılır!!
-
     By linkBecomeASeller = By.linkText("Become a Seller");
-
     public void btnBecomeASeller() {
-        click(linkBecomeASeller);
-
+       selectedNewWindow(linkBecomeASeller);
     }
 
 
     // Ana sayfada üst tarafta bulunan Contact linki
     By contactBtn = By.linkText("Contact");
-
     public void btnContact() {
         click(contactBtn);
 
@@ -68,7 +69,7 @@ public class HomePage extends FunctionClass {
     // Ana sayfada bulunan Arama Kutusu
     By homeSearchBox = By.id("search");
 
-    public HomePage txtHomeSearchBox(String search) {
+    public P02_HomePage txtHomeSearchBox(String search) {
         sendKeys(homeSearchBox, search);
         return this;
     }
@@ -76,17 +77,15 @@ public class HomePage extends FunctionClass {
 
     //Homepage cart butonu
     By cartBtn = By.cssSelector(".hidden.product-cart");
-
-    public HomePage btnCart() {
+    public P02_HomePage btnCart() {
         click(cartBtn);
         return this;
     }
 
 
-    By homePageCategory = By.xpath("//button[contains(@id,'menu-button')]");
-
     //Homepage de  istenen kategoriyi seçmemizi sağlar
-    public HomePage homePageMenuDropDown(String categori) {
+    By homePageCategory = By.xpath("//button[contains(@id,'menu-button')]");
+    public P02_HomePage homePageMenuDropDown(String categori) {
 
         click(homePageCategory);
         String xpath = "//a[contains(@href,'/')]";
@@ -96,7 +95,8 @@ public class HomePage extends FunctionClass {
     }
 
 
-    public HomePage hompageLeftDropDownAndButton(String categori) {
+    //Anasayfa sol taraftaki butonlar
+    public P02_HomePage hompageLeftDropDownAndButton(String categori) {
         String xpath = "//ul/li[contains(.,'')]";
         selectedWithCategori(xpath, categori);
 

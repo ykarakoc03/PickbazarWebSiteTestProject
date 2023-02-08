@@ -9,14 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
-public abstract class FunctionClass {
+public abstract class P01_FunctionClass {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
 
-    public FunctionClass(WebDriver driver) {
+    public P01_FunctionClass(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
@@ -69,9 +70,23 @@ public abstract class FunctionClass {
         xpath = xpath.substring(0, xpath.length() - 3) + categori + xpath.substring(xpath.length() - 3);
 
         By selectedCategory = By.xpath(xpath);
-
         click(selectedCategory);
 
+    }
+
+
+    public void selectedNewWindow(By by) {
+        String homePageWindowHandle = driver.getWindowHandle();
+        click(by);
+
+        Set<String> wh = driver.getWindowHandles();
+        for (String each : wh) {
+            driver.switchTo().window(each);
+            if (each.equals(homePageWindowHandle)) {
+                driver.close();
+            }
+
+        }
     }
 
 
