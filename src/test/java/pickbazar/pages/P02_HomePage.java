@@ -14,11 +14,18 @@ public class P02_HomePage extends P01_FunctionClass {
         super(driver);
     }
 
-
+    By joinButton = By.xpath("//button[text()='Join']");
+    By linkBecomeASeller = By.linkText("Become a Seller");
+    By contactBtn = By.linkText("Contact");
+    By fqaBtn = By.linkText("FAQ");
+    By offersBtn = By.linkText("Offers");
+    By shopsBtn = By.linkText("Shops");
+    By homeSearchBox = By.id("search");
+    By cartBtn = By.cssSelector(".hidden.product-cart");
+    By homePageCategory = By.xpath("//button[contains(@id,'menu-button')]");
 
 
     // Ana sayfada üst tarafta bulunan Join
-    By joinButton = By.xpath("//button[text()='Join']");
     public P02_HomePage btnJoin() {
         click(joinButton);
         return this;
@@ -27,14 +34,12 @@ public class P02_HomePage extends P01_FunctionClass {
 
     // Ana sayfada üst tarafta bulunan Become A Seller
     //yeni tab sayfada acılır!!
-    By linkBecomeASeller = By.linkText("Become a Seller");
     public void btnBecomeASeller() {
        selectedNewWindow(linkBecomeASeller);
     }
 
 
     // Ana sayfada üst tarafta bulunan Contact linki
-    By contactBtn = By.linkText("Contact");
     public void btnContact() {
         click(contactBtn);
 
@@ -42,33 +47,23 @@ public class P02_HomePage extends P01_FunctionClass {
 
 
     // Ana sayfada üst tarafta bulunan FAQ linki
-    By fqaBtn = By.linkText("FAQ");
-
     public void btnFQA() {
         click(fqaBtn);
 
     }
 
     // Ana sayfada üst tarafta bulunan Offers linki
-    By offersBtn = By.linkText("Offers");
-
     public void btnOffers() {
         click(offersBtn);
-
     }
 
     // Ana sayfada üst tarafta bulunan Shops linki
-    By shopsBtn = By.linkText("Shops");
-
     public void btnShops() {
         click(shopsBtn);
-
     }
 
 
     // Ana sayfada bulunan Arama Kutusu
-    By homeSearchBox = By.id("search");
-
     public P02_HomePage txtHomeSearchBox(String search) {
         sendKeys(homeSearchBox, search);
         return this;
@@ -76,7 +71,6 @@ public class P02_HomePage extends P01_FunctionClass {
 
 
     //Homepage cart butonu
-    By cartBtn = By.cssSelector(".hidden.product-cart");
     public P02_HomePage btnCart() {
         click(cartBtn);
         return this;
@@ -84,7 +78,6 @@ public class P02_HomePage extends P01_FunctionClass {
 
 
     //Homepage de  istenen kategoriyi seçmemizi sağlar
-    By homePageCategory = By.xpath("//button[contains(@id,'menu-button')]");
     public P02_HomePage homePageMenuDropDown(String categori) {
 
         click(homePageCategory);

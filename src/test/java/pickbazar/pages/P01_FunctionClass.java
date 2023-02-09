@@ -27,7 +27,8 @@ public abstract class P01_FunctionClass {
     public void sendKeys(By locate, String text) {
         WebElement element = driver.findElement(locate);
         actions.scrollToElement(element).perform();
-        wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+        wait.until(ExpectedConditions.visibilityOf(element)).clear();
+        element.sendKeys(text);
     }
 
 
